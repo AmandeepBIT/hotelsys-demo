@@ -1,0 +1,39 @@
+table {
+  width: 100%;
+  th {
+    &.mat-header-cell {
+      &.cdk-header-cell {
+        &.cdk-column-delete {
+          &.mat-column-delete {
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mat-icon {
+  color: var(--grey);
+}
+
+.mat-form-field {
+  margin-top: 12px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  float: left;
+
+  .form-group {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.createNew {
+  float: right;
+  margin-top: 20px;
+}

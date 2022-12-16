@@ -1,0 +1,16 @@
+@use "@angular/material" as mat;
+@import url("./styles/_colors.scss");
+@import url("./styles/global.scss");
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin-top: 0;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
