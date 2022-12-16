@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install and build
-        working-directory: hotelsys-demo
+        working-directory: ${{ github.workspace }}/hotelsys-demo
         run: npm install && npm run build && cp dist/hotelsys/index.html dist/hotelsys/404.html
       
       - name: Deploy
