@@ -1,10 +1,10 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
+import { Subscription } from 'rxjs';
 
 export interface PeriodicElement {
   id: string;
@@ -55,6 +55,7 @@ export class BasicTableComponent implements OnInit {
     'edit',
     'delete',
   ];
+  private subscription: Subscription
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   range = new FormGroup({
@@ -66,17 +67,17 @@ export class BasicTableComponent implements OnInit {
     public reservationService: ReservationsService,
     public dialog: MatDialog
   ) {
-
   }
 
   ngOnInit(): void {
     this.getReservationData()
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   getReservationData() {
-    this.reservationService
-      .getReservationData()
-      .subscribe((res) => (this.dataSource.data = res));
+    this.subscription = this.reservationService.getReservationData().subscribe((res) => (this.dataSource.data = res));
   }
 
   onEditClick(data: any) {
@@ -86,7 +87,7 @@ export class BasicTableComponent implements OnInit {
       data,
     });
 
-    dialogRef.afterClosed().subscribe((result) => { });
+    dialogRef.afterClosed().subscribe(() => { });
   }
 
   onDeleteClick(data: any) {
@@ -103,7 +104,7 @@ export class BasicTableComponent implements OnInit {
   }
 
   applyDateFilter($event) {
-    this.dataSource.filterPredicate = (data, filter) => {
+    this.dataSource.filterPredicate = (data) => {
       if (this.range.value.start && this.range.value.end) {
         return new Date(data.stay.arrivalDate) >= this.range.value.start && new Date(data.stay.arrivalDate) <= this.range.value.end;
       }
@@ -118,7 +119,7 @@ export class BasicTableComponent implements OnInit {
       height: '90%',
       width: '50%',
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.getReservationData()
     });
   }

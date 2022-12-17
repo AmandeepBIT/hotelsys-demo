@@ -7,7 +7,7 @@ import { PeriodicElement } from '../shared/components/basic-table/basic-table.co
   providedIn: 'root',
 })
 export class ReservationsService {
-  private API_URL = 'https://my-json-server.typicode.com/AmandeepBIT/hotelsys-demo/db'
+  private API_URL = 'https://my-json-server.typicode.com/AmandeepBIT/hotelsys-demo/data'
   constructor(public httpClient: HttpClient) { }
 
   public getReservationData(): Observable<any> {
