@@ -44,7 +44,7 @@
     {
       "stay": {
         "arrivalDate": "2022-12-13T18:30:00.000Z",
-        "departureDate": null
+        "departureDate": "2022-12-31T18:30:00.000Z"
       },
       "room": {
         "roomSize": "0",
